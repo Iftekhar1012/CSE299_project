@@ -34,8 +34,8 @@ def create_spreadsheet(title2):
     
     sps_id = spreadsheet_id
     print(sps_id)
-    return sps_id
-    #return("https://docs.google.com/spreadsheets/d/"+sps_id+"/edit#gid=0")
+    
+    return("https://docs.google.com/spreadsheets/d/"+sps_id+"/edit#gid=0")
 
 title = "My second auto"
 if __name__ == "__main__":
