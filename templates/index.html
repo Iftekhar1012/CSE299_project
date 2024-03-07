@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Text Boxes</title>
+    <style>
+        /* Style for the hidden text boxes */
+        .hidden {
+            display: none;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            /* Set the background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        form {
+            background-color: white;
+
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+
+            margin-top: 25px;
+            margin-left: 34px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Paste the links of the Google Sheets</h1>
+        <h1>and enter the title of the test</h1>
+        <form action="/submit" method="post">
+            <label for="form1">Google Sheet link 1:</label>
+            <input type="text" id="form1" name="form1"><br><br>
+
+            <label for="form2">Google Sheet link 2:</label>
+            <input type="text" id="form2" name="form2"><br><br>
+
+            <label for="form3">Title for the test:</label><br>
+            <input type="text" id="form3" name="form3"><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function showTextBoxes() {
+            // Get the div containing the text boxes
+            var textBoxesDiv = document.getElementById("textBoxes");
+
+            // Toggle the visibility of the div
+            if (textBoxesDiv.style.display === "none") {
+                textBoxesDiv.style.display = "block";
+            } else {
+                textBoxesDiv.style.display = "none";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
