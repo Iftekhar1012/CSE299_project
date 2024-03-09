@@ -19,73 +19,29 @@ form_service = discovery.build(
     static_discovery=False,
 )
 
-# Request body for creating a form
-NEW_FORM = {
+def create_gform(title, questions):
+   NEW_FORM = {
     "info": {
-        "title": "Quickstart form",
+        "title": title,
+       
+       
     }
-}
-
-# Request body to add a multiple-choice question
-NEW_QUESTION = {
-    "requests": [
-        {
-            "createItem": {
-                "item": {
-                    "title": (
-                        "Skibidi?"
+    }
+   requests_list = []  # Initialize an empty list to store the requests
+   for index, title in enumerate(questions, start=0):
+    request = {
+        "createItem": {
+            "item": {
+                "title": questions,
+                "questionItem": {
+                    "question": {
+                        "required": False,
+                        "textQuestion": {"paragraph" : True},
                         
-                    ),
-                    "questionItem": {
-                        "question": {
-                            "required": False,
-                            "textQuestion": {
-                               
-                               
-                                
-                            },
-                        }
-                    },
-                },
-                "location": {"index": 0},
+                    }
+                }
             },
-            
-        },
-        {
-            "createItem": {
-                "item": {
-                    "title": (
-                        "toilet"
-                    ),
-                    "questionItem": {
-                        "question": {
-                            "required": False,
-                            "textQuestion": {
-                                
-                               
-                               
-                            },
-                        }
-                    },
-                },
-                "location": {"index": 1},
-            },
-            
+            "location": {"index": index}
         }
-    ]
-}
+    }
 
-# Creates the initial form
-result = form_service.forms().create(body=NEW_FORM).execute()
-
-# Adds the question to the form
-question_setting = (
-    form_service.forms()
-    .batchUpdate(formId=result["formId"], body=NEW_QUESTION)
-    .execute()
-)
-
-# Prints the result to show the question has been added
-get_result = form_service.forms().get(formId=result["formId"]).execute()
-print(get_result)
-print(get_result['responderUri'])
