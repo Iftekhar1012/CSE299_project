@@ -9,11 +9,10 @@ DISCOVERY_DOC = "https://forms.googleapis.com/$discovery/rest?version=v1"
 
 creds= 'credentials.json'
 DRIVE_FOLDER_ID = '1wj-Qw4iTDqkUsIJ-_AjnkGrOPHhTG1da'
-index = 0
 
 
 
-titles = ["I hope this works", "Please please please", "YES!"]
+
 
 def create_gform(name, titles):
     creds = service_account.Credentials.from_service_account_file('credentials.json')
@@ -56,5 +55,3 @@ def create_gform(name, titles):
     #print(get_result)
     return(get_result['responderUri'])
 
-str1 = "Hope"
-print(create_gform(str1, titles))
