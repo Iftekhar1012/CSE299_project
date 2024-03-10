@@ -33,7 +33,7 @@ def read_gform(form_id):
         for response in result['responses']:
             if 'respondentEmail' in response:
                 respondent_email.append(response['respondentEmail'])
-    return respondent_email
+    return result
 
 print(read_gform(form_id1))
                 
