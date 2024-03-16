@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        form { max-width: 500px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"], input[type="email"], input[type="number"] { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        input[type="submit"] { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        input[type="submit"]:hover { background-color: #45a049; }
+        .message-list { list-style-type: none; padding: 0; }
+        .message-list li { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Student Registration</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="message-list">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="{{ form.name.id }}">{{ form.name.label }}</label>
+            {{ form.name(size=32, class_="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.email.id }}">{{ form.email.label }}</label>
+            {{ form.email(size=32, class_="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.age.id }}">{{ form.age.label }}</label>
+            {{ form.age(size=32, class_="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class_="btn btn-primary") }}
+        </div>
+    </form>
+</body>
+</html>
