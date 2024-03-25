@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Interface</title>
+    <style>
+        /* Some basic styling */
+        #button1 {
+            text-align: center;
+            position: relative;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #000000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .popup-content {
+            text-align: center;
+        }
+
+        .close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>You are logged in with {{session.email}} </h1>
+
+    <h1>Create an assessment</h1><br>
+    <h1>Paste the links of the Google Sheets</h1>
+    <h1>and enter the title of the test</h1>
+    <h1> You can also upload a pdf file <h1>
+            <button id="button1" , onclick="toggleInterface()">Create Assessment</button>
+
+            <div id="popupContainer" class="popup">
+                <div class="popup-content">
+                    <span class="close" onclick="toggleInterface()">&times;</span>
+                    <form id="myForm" action="/submit" method="post" enctype="multipart/form-data">
+                        <label for="textbox1">Google Sheet link 1:</label>
+                        <input type="text" id="textbox1" name="textbox1"><br><br>
+                        <label for="textbox2">Google Sheet link 2:</label>
+                        <input type="text" id="textbox2" name="textbox2"><br><br>
+                        <label for="textbox3">Title: </label>
+                        <input type="text" id="textbox3" name="textbox3"><br><br>
+                        <label for="pdf">PDF: </label>
+                        <input type="file" id="pdf" name="pdf_file" accept=".pdf"><br><br>
+
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+
+
+    <h2>Stored Texts</h2>
+    <button onclick="fetchData()">Retrieve Data</button>
+    <br><br>
+    <table id="stored-texts-table" border="1">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Text</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody id="stored-texts-body">
+            <!-- Table body will be populated dynamically -->
+        </tbody>
+    </table>
+
+    <script>
+        function fetchData() {
+            fetch('/get_data')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('stored-texts-body');
+                    tableBody.innerHTML = ''; // Clear existing rows
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${row.email}</td>
+                            <td>${row.text_stored}</td>
+                            <td>${row.created_date}</td>
+                        `;
+                        tableBody.appendChild(tr);
+                    });
+                });
+        }
+    </script>
+
+            <script>
+                function toggleInterface() {
+                    var popup = document.getElementById('popupContainer');
+                    if (popup.style.display === "block") {
+                        popup.style.display = "none";
+                    } else {
+                        popup.style.display = "block";
+                    }
+                }
+            </script>
+
+</body>
+
+</html>
