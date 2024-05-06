@@ -56,62 +56,26 @@
                     <form id="myForm" action="/submit" method="post" enctype="multipart/form-data">
                         <label for="textbox1">Google Sheet link 1:</label>
                         <input type="text" id="textbox1" name="textbox1"><br><br>
+                        
                         <label for="textbox2">Google Sheet link 2:</label>
                         <input type="text" id="textbox2" name="textbox2"><br><br>
+
                         <label for="textbox3">Title: </label>
                         <input type="text" id="textbox3" name="textbox3"><br><br>
-                        <label for="date_input">Date:</label>
-        <input type="date" id="date_input" name="date_input">
-        <br><br>
-                        <label for="time_input">Time:</label>
-                        <input type="time" id="time_input" name="time_input">
-                        <br><br>
 
-                        <label for="pdf">PDF: </label>
+                        <label for="timeInput">Select a time:</label>
+                        <input type="time" id="timeInput" name="timeInput"><br><br>
 
-                        <input type="file" id="pdf" name="pdf_file" accept=".pdf"><br><br>
+                        <label for="dateInput">Select a date:</label>
+                        <input type="date" id="dateInput" name="dateInput"><br><br>
+
+                        <input type="file" name="files[]" multiple>
+                        <input type="submit" value="Upload"><br><br>
 
                         <input type="submit" value="Submit">
                     </form>
                 </div>
             </div>
-
-
-    <h2>Stored Texts</h2>
-    <button onclick="fetchData()">Retrieve Data</button>
-    <br><br>
-    <table id="stored-texts-table" border="1">
-        <thead>
-            <tr>
-                <th>Email</th>
-                <th>Text</th>
-                <th>Created Date</th>
-            </tr>
-        </thead>
-        <tbody id="stored-texts-body">
-            <!-- Table body will be populated dynamically -->
-        </tbody>
-    </table>
-
-    <script>
-        function fetchData() {
-            fetch('/get_data')
-                .then(response => response.json())
-                .then(data => {
-                    const tableBody = document.getElementById('stored-texts-body');
-                    tableBody.innerHTML = ''; // Clear existing rows
-                    data.forEach(row => {
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `
-                            <td>${row.email}</td>
-                            <td>${row.text_stored}</td>
-                            <td>${row.created_date}</td>
-                        `;
-                        tableBody.appendChild(tr);
-                    });
-                });
-        }
-    </script>
 
             <script>
                 function toggleInterface() {
